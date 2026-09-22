@@ -1,0 +1,46 @@
+#!/bin/bash
+
+clear
+echo "========================================="
+echo "   CONFIGURACION DE DATOS DE GITHUB      "
+echo "========================================="
+
+
+nombre_actual=$(git config --global user.name)
+correo_actual=$(git config --global user.email)
+
+echo "Datos configurados actualmente:"
+echo "👤 Nombre:  ${nombre_actual:-'(No configurado)'}"
+echo "📧 Correo:  ${correo_actual:-'(No configurado)'}"
+echo "========================================="
+echo ""
+
+read -p "¿Desea cambiar o configurar estos datos? (s/n): " responder
+
+if [[ "$responder" == "s" || "$responder" == "S" ]]; then
+    echo ""
+    nombre=""
+    while [ -z "$nombre" ]; do
+        read -p "Introduce tu nombre de usuario de GitHub: " nombre
+        if [ -z "$nombre" ]; then
+            echo "El nombre no puede estar vacio."
+        fi
+    done
+
+    correo=""
+    while [ -z "$correo" ]; do
+        read -p "Introduce tu correo de GitHub: " correo
+        if [ -z "$correo" ]; then
+            echo "El correo no puede estar vacio."
+        fi
+    done
+
+    git config --global user.name "$nombre"
+    git config --global user.email "$correo"
+
+    echo ""
+    echo "Datos actualizados correctamente con exito!"
+else
+    echo ""
+    echo "No se realizaron cambios."
+fi

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# El parámetro -e permite usar la tecla TAB para autocompletar rutas y archivos
+read -e -p "Arrastra el archivo aquí o escribe su ruta (usa TAB): " ruta_completa
+
+# Validamos con un if-else si el archivo realmente existe antes de usar Git
+if [ -e "$ruta_completa" ]; then
+    git add "$ruta_completa"
+    echo "¡Archivo añadido correctamente!"
+else
+    echo "Error: El archivo o ruta no existe."
+fi
+

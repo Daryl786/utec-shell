@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+    echo "Error: No estas dentro de un repositorio de Git."
+    echo "Asegurate de ejecutar primero el paso 1 (git add)."
+    exit 1
+fi
+
+git config --global credential.helper store
+
+clear
+echo "=========================================================="
+echo "                 PREPARANDO GIT PUSH                      "
+echo "=========================================================="
+echo "NOTA IMPORTANTE SI ES TU PRIMERA VEZ:"
+echo "GitHub ya NO acepta tu contraseña normal en la terminal."
+echo "Cuando te lo pida:"
+echo "Username: Pon tu usuario de GitHub."
+echo "Password: ¡PEGA TU PERSONAL ACCESS TOKEN (no tu contrasena)!"
+echo "=========================================================="
+echo ""
+
+rama_actual=$(git branch --show-current)
+
+echo "Subiendo cambios a la rama '$rama_actual'..."
+echo "----------------------------------------------------------"
+
+if git push origin "$rama_actual"; then
+    echo "----------------------------------------------------------"
+    echo "Push completado con exito! Los cambios ya estan en GitHub."
+else
+    echo "----------------------------------------------------------"
+    echo "Error al hacer el push."
+    echo "Revisa si el Token tiene permisos de escritura o si la rama existe."
+fi

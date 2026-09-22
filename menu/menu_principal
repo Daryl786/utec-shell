@@ -1,0 +1,65 @@
+#!/bin/bash
+
+opcion=0
+
+while [ "$opcion" -ne 5 ];do
+clear
+
+    echo "===================="
+    echo "   MENU PRINCIPAL   "
+    echo "===================="
+    echo "1. git add"
+    echo "2. git commit"
+    echo "3. git push"
+    echo "4. poner datos"
+    echo "5. salir"
+    echo "===================="
+    read -p "Elige una opcion (1-5): " opcion
+
+	case $opcion in
+
+		1)
+			./git_add
+			echo ""
+			read -p "precione enter para volver..."
+		;;
+
+		2)
+			./git_commit
+			echo ""
+			read -p "precione enter para volver..."
+		;;
+
+
+		3)
+			./git_push
+			echo ""
+			read -p "precione enter para volver..."
+		;;
+
+		4)
+			./datos
+			echo ""
+			read -p "precione enter para volver..."
+		;;
+
+		5)
+			read -p "quiere salir?: (y/n)" salir
+			if [[ $salir == "y" || $salir == "Y" ]];then
+				echo "saliendo..."
+				sleep 3
+				clear
+				exit 0
+			else
+				read -p "precione enter para continuar"
+				clear
+				opcion=0
+			fi
+		;;
+
+		*)
+			read -p "ingreso una opcion invalida precione enter para continuar"
+			clear
+		;;
+	esac
+done

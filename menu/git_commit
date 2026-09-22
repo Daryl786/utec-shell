@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+    echo "Error: No estas dentro de un repositorio de Git."
+    echo "Asegrate de ejecutar primero el paso 1 (git add) para ubicar el proyecto."
+    exit 1
+fi
+
+mensaje=""
+while [ -z "$mensaje" ]; do
+    read -p "Escribe el mensaje para el commit: " mensaje
+    if [ -z "$mensaje" ]; then
+        echo "El mensaje no puede estar vac√o Intntalo de nuevo."
+    fi
+done
+
+clear
+echo "Ejecutando: git commit -m \"$mensaje\"..."
+echo "------------------------------------------------"
+
+if git commit -m "$mensaje"; then
+    echo "------------------------------------------------"
+    echo "Commit creado con exito!"
+else
+    echo "------------------------------------------------"
+    echo "Error al crear el commit."
+    echo "Te aseguraste de a√±adir archivos primero con 'git add'?"
+fi
