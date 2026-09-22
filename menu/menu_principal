@@ -1,5 +1,5 @@
 #!/bin/bash
-
+DIR_MENU="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 opcion=0
 
 while [ "$opcion" -ne 5 ];do
@@ -19,26 +19,26 @@ clear
 	case $opcion in
 
 		1)
-			./git_add
+			"$DIR_MENU/git_add"
 			echo ""
 			read -p "precione enter para volver..."
 		;;
 
 		2)
-			./git_commit
+			"$DIR_MENU/git_commit"
 			echo ""
 			read -p "precione enter para volver..."
 		;;
 
 
 		3)
-			./git_push
+			"$DIR_MENU/git_push"
 			echo ""
 			read -p "precione enter para volver..."
 		;;
 
 		4)
-			./datos
+			"$DIR_MENU/datos"
 			echo ""
 			read -p "precione enter para volver..."
 		;;
